@@ -1,13 +1,23 @@
-import './App.css'
-
+import RouteFile from './routes/RouteFile'
+import './index.css'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
-
   return (
     <>
-     <h1 className="text-3xl text-red-700 font-bold underline">
-      Hello world! new check
-    </h1>
-
+    <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    <RouteFile/>
     </>
   )
 }

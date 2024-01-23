@@ -1,0 +1,48 @@
+import axiosAPI, { getToast } from "../../utils/InterceptorApi";
+
+const login = async (data: any) => {
+  try {
+    const response: any = await axiosAPI.post("/user/login", data);
+    response?.data?.token &&
+      localStorage.setItem("access_token", response?.data?.token);
+    console.log(response, "datatatata");
+    if (response?.data?.code === 200) {
+      getToast("success", response?.data?.message);
+    } else {
+      getToast("error", response?.data?.message);
+    }
+    return response;
+  } catch (err: any) {
+    getToast("error", err?.response?.data?.error);
+    return err;
+  }
+};
+
+const register = async (data: any) => {
+  try {
+    const response = await axiosAPI.post("/user/register", data);
+    if (response?.data?.code === 200) {
+      getToast("success", response?.data?.message);
+    }
+    return response;
+  } catch (err) {
+    return err;
+  }
+};
+
+const allUser = async () => {
+  const data: any = { token: true };
+  try {
+    const response = await axiosAPI.get("/user/all", data);
+    if (response?.data?.code === 200) {
+      getToast("success", response?.data?.message);
+    }
+    return response;
+  } catch (err) {
+    return err;
+  }
+};
+
+const loginService = { login, register, allUser };
+
+export default loginService;
